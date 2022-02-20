@@ -8,12 +8,12 @@ export type ButtonPropsType = {
 }
 
 const Button = (props: ButtonPropsType) => {
-    return <div>
+    return <>
             <button className={s.button}
                     disabled={props.disable}
                     onClick={() => props.onClickHandler()}
             >{props.titleButton}</button>
-        </div>
+        </>
 }
 
 export default Button

@@ -5,6 +5,7 @@ export type InputPropsType = {
     title: string
     countValue: number
     onChangeCallback: (countValue: number) => void
+    condition: string
 }
 
 const Input = (props: InputPropsType) => {
@@ -18,7 +19,7 @@ const Input = (props: InputPropsType) => {
     return (
         <div>
             <span>{props.title}</span>
-            <input className={s.startValue}
+            <input className={!props.condition ? s.input : s.errorInput}
                    type="number"
                    onChange={onChangeHandler}
                    value={props.countValue}

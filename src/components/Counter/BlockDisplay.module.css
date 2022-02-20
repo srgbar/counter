@@ -25,16 +25,21 @@
 }
 
 .maxValue {
-    color: rgba(234, 4, 23, 0.93);
+    color: red;
 }
 
 .errorName {
     font-size: 20px;
 }
 
+.errorSettings {
+    color: red;
+    font-size: 45px;
+}
+
 .fon {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     background-color: #1097c2;
     border: 3px solid #062c25;

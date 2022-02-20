@@ -1,11 +1,7 @@
-/*.back {*/
-/*    background-color: #0e7494;*/
-/*    border: 3px solid #062c25;*/
-/*    border-radius: 10px;*/
-/*    margin: 80px auto;*/
-/*    width: 450px;*/
-/*    height: 300px;*/
-/*}*/
+.containerRoot {
+    display: flex;
+    justify-content: space-evenly;
+}
 
 .display {
     background-color: #1097c2;
@@ -25,7 +21,7 @@
     margin: 8% auto;
 }
 
-.maxValue {
+.input {
     background-color: #6acaee;
     border: 3px solid #062c25;
     border-radius: 5px;
@@ -36,9 +32,9 @@
     text-align: center;
 }
 
-.startValue {
-    background-color: #6acaee;
-    border: 3px solid #062c25;
+.errorInput {
+    background-color: #e0b3b3;
+    border: 3px solid red;
     border-radius: 5px;
     width: 100px;
     height: 25px;
@@ -49,7 +45,7 @@
 
 .fon {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     background-color: #1097c2;
     border: 3px solid #062c25;

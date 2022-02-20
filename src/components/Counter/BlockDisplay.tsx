@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./Counter.module.css";
+import s from "./BlockDisplay.module.css";
 import Button from "../Button/Button";
 import {Display} from "./Display";
 
@@ -15,7 +15,8 @@ const BlockDisplay = (props: CounterPropsType) => {
     return <div className={s.back}>
         <Display countValue={props.countValue}
                  maxInputValue={props.maxInputValue}
-                 startValue={props.startInputValue}
+                 startInputValue={props.startInputValue}
+
         />
         <div className={s.fon}>
             <Button

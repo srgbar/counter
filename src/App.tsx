@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import RootComponent from "./components/Settings/RootComponent";
 
@@ -6,7 +6,7 @@ const App = () => {
 
     const [countValue, setCountValue] = useState<number>(0)
     const [startInputValue, setStartInputValue] = useState<number>(0)
-    const [maxInputValue, setMaxInputValue] = useState<number>(0)
+    const [maxInputValue, setMaxInputValue] = useState<number>(5)
 
     const incData = () => {
         if (startInputValue < maxInputValue) {
@@ -15,11 +15,11 @@ const App = () => {
     }
 
     const resData = () => {
-        setCountValue(0);
+        setCountValue(startInputValue);
     }
 
     const onClickSettings = () => {
-        setStartInputValue(startInputValue)
+        setCountValue(startInputValue)
         setMaxInputValue(maxInputValue)
     }
 

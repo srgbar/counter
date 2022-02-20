@@ -1,4 +1,5 @@
 import React from "react";
+import s from "./Root.module.css"
 import BlockDisplay from "../Counter/BlockDisplay";
 import {BlockSettings} from "./BlockSettings";
 
@@ -16,25 +17,29 @@ export type RootPropsType = {
 const RootComponent = (props: RootPropsType) => {
 
     return (
-        <div>
-            <BlockDisplay
-                countValue={props.countValue}
-                incData={props.incData}
-                resData={props.resData}
+        <div className={s.containerRoot}>
+            <div>
+                <BlockSettings
+                    onChangeHandlerStart={props.onChangeHandlerStart}
+                    onChangeHandlerMax={props.onChangeHandlerMax}
 
-                startInputValue={props.startInputValue}
-                maxInputValue={props.maxInputValue}
+                    startInputValue={props.startInputValue}
+                    maxInputValue={props.maxInputValue}
 
-            />
-            <BlockSettings
-                onChangeHandlerStart={props.onChangeHandlerStart}
-                onChangeHandlerMax={props.onChangeHandlerMax}
+                    onClickSettings={props.onClickSettings}
+                />
+            </div>
+            <div>
+                <BlockDisplay
+                    countValue={props.countValue}
+                    incData={props.incData}
+                    resData={props.resData}
 
-                startInputValue={props.startInputValue}
-                maxInputValue={props.maxInputValue}
+                    startInputValue={props.startInputValue}
+                    maxInputValue={props.maxInputValue}
 
-                onClickHandler={props.onClickSettings}
-            />
+                />
+            </div>
         </div>
     )
 }
