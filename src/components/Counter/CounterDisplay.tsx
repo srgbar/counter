@@ -1,5 +1,5 @@
 import React from "react";
-import s from "./BlockDisplay.module.css";
+import s from "../../App.module.css"
 import Button from "../Button/Button";
 import {Display} from "./Display";
 
@@ -8,17 +8,18 @@ export type CounterPropsType = {
     incData: () => void
     resData: () => void
     maxInputValue: number
-    startInputValue: number
+    isMessage: boolean
+    condition: boolean
 }
 
-const BlockDisplay = (props: CounterPropsType) => {
-    return <div className={s.back}>
+const CounterDisplay = (props: CounterPropsType) => {
+    return <div className={s.containerDisplay}>
         <Display countValue={props.countValue}
                  maxInputValue={props.maxInputValue}
-                 startInputValue={props.startInputValue}
-
+                 isMessage={props.isMessage}
+                 condition={props.condition}
         />
-        <div className={s.fon}>
+        <div className={s.containerButton}>
             <Button
                 titleButton={"INCREASE"}
                 disable={props.countValue >= props.maxInputValue}
@@ -33,4 +34,4 @@ const BlockDisplay = (props: CounterPropsType) => {
     </div>
 }
 
-export default BlockDisplay
+export default CounterDisplay

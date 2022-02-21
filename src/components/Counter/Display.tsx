@@ -1,26 +1,26 @@
 import React from "react";
-import s from "./BlockDisplay.module.css";
+import s from "../../App.module.css"
 
 type DisplayPropsType = {
     countValue: number
     maxInputValue: number
-    startInputValue: number
+    isMessage: boolean
+    condition: boolean
 }
 
 export function Display(props: DisplayPropsType) {
 
-    const condition = props.startInputValue < 0 || props.startInputValue > props.maxInputValue || props.startInputValue === props.maxInputValue
-
     return <>
-        {!condition
-            ? props.countValue >= props.maxInputValue
-                ? <div className={`${s.display} ${s.maxValue}`}>
-                    <span>{props.countValue}</span>
-                    <span className={s.errorName}>max value</span>
-                </div>
-                : <span className={s.display}>{props.countValue}</span>
-
-            : <span className={`${s.display} ${s.errorSettings}`}>Incorrect value!</span>
+        {!props.condition
+            ? !props.isMessage
+                ? <span className={`${s.displayCount} ${s.messageName}`}>Enter values and press 'set'</span>
+                : props.countValue >= props.maxInputValue
+                    ? <div className={`${s.displayCount} ${s.maxValue}`}>
+                        <span>{props.countValue}</span>
+                        <span className={s.errorName}>max value</span>
+                    </div>
+                    : <span className={s.displayCount}>{props.countValue}</span>
+            : <span className={`${s.displayCount} ${s.errorSettings}`}>Incorrect value!</span>
         }
-    </>;
+    </>
 }
