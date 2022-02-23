@@ -13,7 +13,6 @@ export type SettingsPropsType = {
 }
 
 export function SettingsDisplay(props: SettingsPropsType) {
-
     return <div className={s.containerDisplay}>
         <div className={s.displaySet}>
             <div className={s.containerInput}>

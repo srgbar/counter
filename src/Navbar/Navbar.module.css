@@ -1,0 +1,24 @@
+.navbar {
+    display: flex;
+    margin-bottom: 40px;
+    font-family: "Lucida Sans Typewriter";
+}
+
+.item {
+    margin-right: 100px;
+}
+
+.route {
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 25px;
+}
+
+.route:hover {
+    color: #831486;
+}
+
+.route:focus {
+    color: #831486;
+}

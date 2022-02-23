@@ -20,21 +20,20 @@ const RootComponent = (props: RootPropsType) => {
 
     return (
         <div className={s.containerRoot}>
-            <SettingsDisplay
-                onChangeHandlerStart={props.onChangeHandlerStart}
-                onChangeHandlerMax={props.onChangeHandlerMax}
-                startInputValue={props.startInputValue}
-                maxInputValue={props.maxInputValue}
-                onClickSettings={props.onClickSettings}
-                condition={props.condition}
+            <SettingsDisplay onChangeHandlerStart={props.onChangeHandlerStart}
+                             onChangeHandlerMax={props.onChangeHandlerMax}
+                             startInputValue={props.startInputValue}
+                             maxInputValue={props.maxInputValue}
+                             onClickSettings={props.onClickSettings}
+                             condition={props.condition}
             />
-            <CounterDisplay
-                countValue={props.countValue}
-                incData={props.incData}
-                resData={props.resData}
-                maxInputValue={props.maxInputValue}
-                isMessage={props.isMessage}
-                condition={props.condition}
+            <CounterDisplay type={"counterV1"}
+                            countValue={props.countValue}
+                            incData={props.incData}
+                            resData={props.resData}
+                            maxInputValue={props.maxInputValue}
+                            isMessage={props.isMessage}
+                            condition={props.condition}
             />
         </div>
     )

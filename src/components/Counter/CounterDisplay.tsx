@@ -2,8 +2,10 @@ import React from "react";
 import s from "../../App.module.css"
 import Button from "../Button/Button";
 import {Display} from "./Display";
+import {useHistory} from "react-router-dom";
 
 export type CounterPropsType = {
+    type: "counterV1" | "counterV2"
     countValue: number
     incData: () => void
     resData: () => void
@@ -13,25 +15,61 @@ export type CounterPropsType = {
 }
 
 const CounterDisplay = (props: CounterPropsType) => {
-    return <div className={s.containerDisplay}>
-        <Display countValue={props.countValue}
-                 maxInputValue={props.maxInputValue}
-                 isMessage={props.isMessage}
-                 condition={props.condition}
-        />
-        <div className={s.containerButton}>
-            <Button
-                titleButton={"INCREASE"}
-                disable={props.countValue >= props.maxInputValue}
-                onClickHandler={props.incData}
+
+    const history = useHistory() //для изменение адреса
+
+    const setButtonHandler = () => { // попадаем в окно настроек из дисплея счетчика при клике по кнопке SET
+        history.push("/counterV2/settings")
+    }
+
+    if (props.type === 'counterV1') {
+        return <div className={s.containerDisplay}>
+            <Display countValue={props.countValue}
+                     maxInputValue={props.maxInputValue}
+                     isMessage={props.isMessage}
+                     condition={props.condition}
             />
-            <Button
-                titleButton={"RESET"}
-                disable={props.countValue <= 0}
-                onClickHandler={props.resData}
-            />
+            <div className={s.containerButton}>
+                <Button
+                    titleButton={"INC"}
+                    disable={props.countValue >= props.maxInputValue}
+                    onClickHandler={props.incData}
+                />
+                <Button
+                    titleButton={"RESET"}
+                    disable={props.countValue <= 0}
+                    onClickHandler={props.resData}
+                />
+            </div>
         </div>
-    </div>
+    } else if (props.type === 'counterV2') {
+        return <div className={s.containerDisplay}>
+            <Display countValue={props.countValue}
+                     maxInputValue={props.maxInputValue}
+                     isMessage={props.isMessage}
+                     condition={props.condition}
+            />
+            <div className={s.containerButton}>
+                <Button
+                    titleButton={"INC"}
+                    disable={props.countValue >= props.maxInputValue}
+                    onClickHandler={props.incData}
+                />
+                <Button
+                    titleButton={"RESET"}
+                    disable={props.countValue <= 0}
+                    onClickHandler={props.resData}
+                />
+                <Button
+                    titleButton={"SET"}
+                    disable={!!props.condition}
+                    onClickHandler={setButtonHandler}
+                />
+            </div>
+        </div>
+    } else {
+        return <div>no type defined</div>
+    }
 }
 
 export default CounterDisplay

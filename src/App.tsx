@@ -1,6 +1,9 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import s from './App.module.css';
 import RootComponent from "./components/RootComponent";
+import {Navbar} from "./Navbar/Navbar";
+import {Redirect, Route, Switch} from "react-router-dom";
+import GeneralDisplay from "./components/General Display/GeneralDisplay";
 
 const App = () => {
 
@@ -52,22 +55,41 @@ const App = () => {
     }
 
     return <div className={s.app}>
-        <h1>Counter v1</h1>
-        <RootComponent countValue={countValue}
-                       startInputValue={startInputValue}
-                       maxInputValue={maxInputValue}
+        <Navbar/>
+        <Switch>
+            <Route path={'/'} exact render={() => <Redirect to="/counterV1"/>}/>
+            <Route path="/counterV1" render={() => <RootComponent
+                countValue={countValue}
+                startInputValue={startInputValue}
+                maxInputValue={maxInputValue}
 
-                       incData={incData}
-                       resData={resData}
+                incData={incData}
+                resData={resData}
 
-                       onChangeHandlerStart={onChangeHandlerStart}
-                       onChangeHandlerMax={onChangeHandlerMax}
-                       onClickSettings={onClickSettings}
+                onChangeHandlerStart={onChangeHandlerStart}
+                onChangeHandlerMax={onChangeHandlerMax}
+                onClickSettings={onClickSettings}
 
-                       isMessage={isMessage}
-                       condition={condition}
-        />
+                isMessage={isMessage}
+                condition={condition}
+            />}/>
+            <Route path="/counterV2" render={() => <GeneralDisplay
+                countValue={countValue}
+                startInputValue={startInputValue}
+                maxInputValue={maxInputValue}
+
+                incData={incData}
+                resData={resData}
+
+                onChangeHandlerStart={onChangeHandlerStart}
+                onChangeHandlerMax={onChangeHandlerMax}
+                onClickSettings={onClickSettings}
+
+                isMessage={isMessage}
+                condition={condition}
+            />}/>
+        </Switch>
     </div>
 }
 
-export default App;
+export default App
