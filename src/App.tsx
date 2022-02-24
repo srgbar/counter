@@ -3,55 +3,68 @@ import s from './App.module.css';
 import RootComponent from "./components/RootComponent";
 import {Navbar} from "./Navbar/Navbar";
 import {Redirect, Route, Switch} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "./bll/store";
+import {changeMaxValueAC, changeStartValueAC, incValueAC, resetAC, setValuesAC} from "./bll/counter-reducer";
 import GeneralDisplay from "./components/General Display/GeneralDisplay";
 
 const App = () => {
 
-    const [countValue, setCountValue] = useState<number>(0) // текущее значение счетчика
-    const [startInputValue, setStartInputValue] = useState(0) // стартовое значение счетчика
-    const [maxInputValue, setMaxInputValue] = useState<number>(5) // макс значение счетчика
-    const [isMessage, setIsMessage] = useState<boolean>(true) // показывать или нет сообщения вместо value
-    const condition = startInputValue < 0 || startInputValue > maxInputValue || startInputValue === maxInputValue // проверка на условия ввода
+    const value = useSelector<AppStateType, number>(state => state.counter.value)
+    const startValue = useSelector<AppStateType, number>(state => state.counter.startValue)
+    const maxValue = useSelector<AppStateType, number>(state => state.counter.maxValue)
+    const dispatch = useDispatch()
 
-    // сохраняем стартовое и максимальное значения счетчика в Local Storage
+    const condition = startValue < 0 || startValue > maxValue || startValue === maxValue // проверка на условия ввода
+
+    // const [countValue, setCountValue] = useState<number>(0) // текущее значение счетчика
+    // const [startInputValue, setStartInputValue] = useState(0) // стартовое значение счетчика
+    // const [maxInputValue, setMaxInputValue] = useState<number>(5) // макс значение счетчика
+
+    const [isMessage, setIsMessage] = useState<boolean>(true) // показывать или нет сообщения вместо value
+
+
+    // получаем стартовое и максимальное значения счетчика из Local Storage
     useEffect(() => {
         const localStorageStartValueStr = localStorage.getItem("startInputValue")
         const localStorageMaxValueStr = localStorage.getItem("maxInputValue")
 
         if (localStorageStartValueStr) {
-            setStartInputValue(JSON.parse(localStorageStartValueStr))
+            // setStartInputValue(JSON.parse(localStorageStartValueStr))
         }
         if (localStorageMaxValueStr) {
-            setMaxInputValue(JSON.parse(localStorageMaxValueStr))
+            // setMaxInputValue(JSON.parse(localStorageMaxValueStr))
         }
+        console.log(localStorageStartValueStr, localStorageMaxValueStr)
     }, [])
 
     const incData = () => {  // увеличение счетчика на единицу
-        setCountValue(countValue + 1)
+        dispatch(incValueAC())
     }
 
     const resData = () => { // сброс значения счетчика до стартового
-        setCountValue(startInputValue)
-    }
-
-    const onClickSettings = () => { // передача настроек счетчика
-        setCountValue(startInputValue)
-        setMaxInputValue(maxInputValue)
-        setIsMessage(true)
-        localStorage.setItem("startInputValue", JSON.stringify(startInputValue))
-        localStorage.setItem("maxInputValue", JSON.stringify(maxInputValue))
+        // setCountValue(startInputValue)
+        dispatch(resetAC(startValue))
     }
 
     // изменение стартового значения в настройках
     const onChangeHandlerStart = (e: ChangeEvent<HTMLInputElement>) => {
-        setStartInputValue(+e.currentTarget.value)
+        dispatch(changeStartValueAC(+e.currentTarget.value))
         setIsMessage(false)
     }
 
     // изменение максимального значения в настройках
     const onChangeHandlerMax = (e: ChangeEvent<HTMLInputElement>) => {
-        setMaxInputValue(+e.currentTarget.value)
+        dispatch(changeMaxValueAC(+e.currentTarget.value))
         setIsMessage(false)
+    }
+
+    const onClickSettings = () => { // передача настроек счетчика
+        dispatch(setValuesAC(startValue, maxValue))
+        setIsMessage(true)
+
+        localStorage.setItem("startInputValue", JSON.stringify(startValue))
+        localStorage.setItem("maxInputValue", JSON.stringify(maxValue))
     }
 
     return <div className={s.app}>
@@ -59,9 +72,9 @@ const App = () => {
         <Switch>
             <Route path={'/'} exact render={() => <Redirect to="/counterV1"/>}/>
             <Route path="/counterV1" render={() => <RootComponent
-                countValue={countValue}
-                startInputValue={startInputValue}
-                maxInputValue={maxInputValue}
+                value={value}
+                startValue={startValue}
+                maxValue={maxValue}
 
                 incData={incData}
                 resData={resData}
@@ -74,9 +87,9 @@ const App = () => {
                 condition={condition}
             />}/>
             <Route path="/counterV2" render={() => <GeneralDisplay
-                countValue={countValue}
-                startInputValue={startInputValue}
-                maxInputValue={maxInputValue}
+                value={value}
+                startValue={startValue}
+                maxValue={maxValue}
 
                 incData={incData}
                 resData={resData}

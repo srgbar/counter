@@ -3,7 +3,7 @@ import s from "../../App.module.css"
 
 export type InputPropsType = {
     title: string
-    countValue: number
+    value: number
     onChangeCallback: (e: ChangeEvent<HTMLInputElement>) => void
     condition: boolean
 }
@@ -20,7 +20,7 @@ const Input = (props: InputPropsType) => {
             <input className={!props.condition ? s.input : `${s.input} ${s.errorInput}`}
                    type="number"
                    onChange={onChangeHandler}
-                   value={props.countValue}
+                   value={props.value}
             />
         </div>
     )

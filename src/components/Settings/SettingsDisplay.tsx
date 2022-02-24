@@ -5,8 +5,8 @@ import Button from "../Button/Button";
 
 export type SettingsPropsType = {
     onClickSettings: () => void
-    startInputValue: number
-    maxInputValue: number
+    startValue: number
+    maxValue: number
     onChangeHandlerStart: (e: ChangeEvent<HTMLInputElement>) => void
     onChangeHandlerMax: (e: ChangeEvent<HTMLInputElement>) => void
     condition: boolean
@@ -17,14 +17,14 @@ export function SettingsDisplay(props: SettingsPropsType) {
         <div className={s.displaySet}>
             <div className={s.containerInput}>
                 <Input title={"start value: "}
-                       countValue={props.startInputValue}
+                       value={props.startValue}
                        onChangeCallback={props.onChangeHandlerStart}
                        condition={props.condition}
                 />
             </div>
             <div className={s.parentDiv}>
                 <Input title={"max value: "}
-                       countValue={props.maxInputValue}
+                       value={props.maxValue}
                        onChangeCallback={props.onChangeHandlerMax}
                        condition={props.condition}
                 />

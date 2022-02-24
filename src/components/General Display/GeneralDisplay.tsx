@@ -5,9 +5,9 @@ import {Route, useHistory} from "react-router-dom";
 import {SettingsDisplay} from "../Settings/SettingsDisplay";
 
 export type RootPropsType = {
-    countValue: number
-    startInputValue: number
-    maxInputValue: number
+    value: number
+    startValue: number
+    maxValue: number
     onChangeHandlerStart: (e: ChangeEvent<HTMLInputElement>) => void
     onChangeHandlerMax: (e: ChangeEvent<HTMLInputElement>) => void
     incData: () => void
@@ -32,10 +32,11 @@ const GeneralDisplay = (props: RootPropsType) => {
                 <div className={s.containerRoot}>
                     <CounterDisplay
                         type={"counterV2"}
-                        countValue={props.countValue}
+                        value={props.value}
                         incData={props.incData}
                         resData={props.resData}
-                        maxInputValue={props.maxInputValue}
+                        maxValue={props.maxValue}
+                        startValue={props.startValue}
                         isMessage={props.isMessage}
                         condition={props.condition}
                     />
@@ -43,10 +44,12 @@ const GeneralDisplay = (props: RootPropsType) => {
             <Route exact path="/counterV2/settings" render={() =>
                 <div className={s.containerRoot}>
                     <SettingsDisplay
+                        startValue={props.startValue}
+                        maxValue={props.maxValue}
+
                         onChangeHandlerStart={props.onChangeHandlerStart}
                         onChangeHandlerMax={props.onChangeHandlerMax}
-                        startInputValue={props.startInputValue}
-                        maxInputValue={props.maxInputValue}
+
                         condition={props.condition}
                         onClickSettings={onClickSettingsV2}
                     />

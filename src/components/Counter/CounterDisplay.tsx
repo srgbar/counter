@@ -5,18 +5,19 @@ import {Display} from "./Display";
 import {useHistory} from "react-router-dom";
 
 export type CounterPropsType = {
-    type: "counterV1" | "counterV2"
-    countValue: number
+    value: number
     incData: () => void
     resData: () => void
-    maxInputValue: number
+    maxValue: number
+    startValue: number
     isMessage: boolean
     condition: boolean
+    type: "counterV1" | "counterV2"
 }
 
 const CounterDisplay = (props: CounterPropsType) => {
 
-    const history = useHistory() //для изменение адреса
+    const history = useHistory() //для изменения адреса
 
     const setButtonHandler = () => { // попадаем в окно настроек из дисплея счетчика при клике по кнопке SET
         history.push("/counterV2/settings")
@@ -24,40 +25,40 @@ const CounterDisplay = (props: CounterPropsType) => {
 
     if (props.type === 'counterV1') {
         return <div className={s.containerDisplay}>
-            <Display countValue={props.countValue}
-                     maxInputValue={props.maxInputValue}
+            <Display value={props.value}
+                     maxValue={props.maxValue}
                      isMessage={props.isMessage}
                      condition={props.condition}
             />
             <div className={s.containerButton}>
                 <Button
                     titleButton={"INC"}
-                    disable={props.countValue >= props.maxInputValue}
+                    disable={props.value >= props.maxValue}
                     onClickHandler={props.incData}
                 />
                 <Button
                     titleButton={"RESET"}
-                    disable={props.countValue <= 0}
+                    disable={props.value <= props.startValue}
                     onClickHandler={props.resData}
                 />
             </div>
         </div>
     } else if (props.type === 'counterV2') {
         return <div className={s.containerDisplay}>
-            <Display countValue={props.countValue}
-                     maxInputValue={props.maxInputValue}
+            <Display value={props.value}
+                     maxValue={props.maxValue}
                      isMessage={props.isMessage}
                      condition={props.condition}
             />
             <div className={s.containerButton}>
                 <Button
                     titleButton={"INC"}
-                    disable={props.countValue >= props.maxInputValue}
+                    disable={props.value >= props.maxValue}
                     onClickHandler={props.incData}
                 />
                 <Button
                     titleButton={"RESET"}
-                    disable={props.countValue <= 0}
+                    disable={props.value <= props.startValue}
                     onClickHandler={props.resData}
                 />
                 <Button
