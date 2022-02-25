@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from "react";
 import s from "../App.module.css"
-import CounterDisplay from "./Counter/CounterDisplay";
-import {SettingsDisplay} from "./Settings/SettingsDisplay";
+import CounterDisplay from "./CounterDisplay/CounterDisplay";
+import {SettingsDisplay} from "./SettingsDisplay/SettingsDisplay";
 
 export type RootPropsType = {
     value: number
@@ -16,7 +16,7 @@ export type RootPropsType = {
     condition: boolean
 }
 
-const RootComponent = (props: RootPropsType) => {
+const SeparateDisplayRootComponent = (props: RootPropsType) => {
 
     return (
         <div className={s.containerRoot}>
@@ -42,4 +42,4 @@ const RootComponent = (props: RootPropsType) => {
     )
 }
 
-export default RootComponent
+export default SeparateDisplayRootComponent

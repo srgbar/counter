@@ -1,18 +1,19 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
 import s from './App.module.css';
-import RootComponent from "./components/RootComponent";
-import {Navbar} from "./Navbar/Navbar";
 import {Redirect, Route, Switch} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "./bll/store";
 import {changeMaxValueAC, changeStartValueAC, incValueAC, resetAC, setValuesAC} from "./bll/counter-reducer";
-import GeneralDisplay from "./components/General Display/GeneralDisplay";
+import GeneralDisplayRootComponent from "./components/GeneralDisplayRootComponent";
+import {Navbar} from "./components/Navbar/Navbar";
+import SeparateDisplayRootComponent from "./components/SeparateDisplayRootComponent";
 
 const App = () => {
 
     const value = useSelector<AppStateType, number>(state => state.counter.value)
     const startValue = useSelector<AppStateType, number>(state => state.counter.startValue)
     const maxValue = useSelector<AppStateType, number>(state => state.counter.maxValue)
+
     const dispatch = useDispatch()
 
     const condition = startValue < 0 || startValue > maxValue || startValue === maxValue // проверка на условия ввода
@@ -25,18 +26,18 @@ const App = () => {
 
 
     // получаем стартовое и максимальное значения счетчика из Local Storage
-    useEffect(() => {
-        const localStorageStartValueStr = localStorage.getItem("startInputValue")
-        const localStorageMaxValueStr = localStorage.getItem("maxInputValue")
-
-        if (localStorageStartValueStr) {
-            // setStartInputValue(JSON.parse(localStorageStartValueStr))
-        }
-        if (localStorageMaxValueStr) {
-            // setMaxInputValue(JSON.parse(localStorageMaxValueStr))
-        }
-        console.log(localStorageStartValueStr, localStorageMaxValueStr)
-    }, [])
+    // useEffect(() => {
+    //     const localStorageStartValueStr = localStorage.getItem("startInputValue")
+    //     const localStorageMaxValueStr = localStorage.getItem("maxInputValue")
+    //
+    //     if (localStorageStartValueStr) {
+    //         // setStartInputValue(JSON.parse(localStorageStartValueStr))
+    //     }
+    //     if (localStorageMaxValueStr) {
+    //         // setMaxInputValue(JSON.parse(localStorageMaxValueStr))
+    //     }
+    //     console.log(localStorageStartValueStr, localStorageMaxValueStr)
+    // }, [])
 
     const incData = () => {  // увеличение счетчика на единицу
         dispatch(incValueAC())
@@ -62,16 +63,15 @@ const App = () => {
     const onClickSettings = () => { // передача настроек счетчика
         dispatch(setValuesAC(startValue, maxValue))
         setIsMessage(true)
-
-        localStorage.setItem("startInputValue", JSON.stringify(startValue))
-        localStorage.setItem("maxInputValue", JSON.stringify(maxValue))
+        // localStorage.setItem("startInputValue", JSON.stringify(startValue))
+        // localStorage.setItem("maxInputValue", JSON.stringify(maxValue))
     }
 
     return <div className={s.app}>
         <Navbar/>
         <Switch>
             <Route path={'/'} exact render={() => <Redirect to="/counterV1"/>}/>
-            <Route path="/counterV1" render={() => <RootComponent
+            <Route path="/counterV1" render={() => <SeparateDisplayRootComponent
                 value={value}
                 startValue={startValue}
                 maxValue={maxValue}
@@ -86,7 +86,7 @@ const App = () => {
                 isMessage={isMessage}
                 condition={condition}
             />}/>
-            <Route path="/counterV2" render={() => <GeneralDisplay
+            <Route path="/counterV2" render={() => <GeneralDisplayRootComponent
                 value={value}
                 startValue={startValue}
                 maxValue={maxValue}
