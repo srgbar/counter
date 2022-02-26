@@ -45,7 +45,7 @@ const App = () => {
 
     const resData = () => { // сброс значения счетчика до стартового
         // setCountValue(startInputValue)
-        dispatch(resetAC(startValue))
+        dispatch(resetAC())
     }
 
     // изменение стартового значения в настройках
@@ -65,6 +65,8 @@ const App = () => {
         setIsMessage(true)
         // localStorage.setItem("startInputValue", JSON.stringify(startValue))
         // localStorage.setItem("maxInputValue", JSON.stringify(maxValue))
+
+        console.log(startValue, maxValue, value)
     }
 
     return <div className={s.app}>
