@@ -1,7 +1,12 @@
 .navbar {
     display: flex;
-    margin-bottom: 40px;
+    margin-bottom: 200px;
     font-family: "Lucida Sans Typewriter";
+    align-items: center;
+    justify-content: center;
+    background-color: #0e7494;
+    width: 100%;
+    height: 50px;
 }
 
 .item {
@@ -9,16 +14,16 @@
 }
 
 .route {
-    color: black;
+    color: white;
     font-weight: bold;
     text-decoration: none;
     font-size: 25px;
 }
 
 .route:hover {
-    color: #831486;
+    color: navajowhite;
 }
 
 .route:focus {
-    color: #831486;
+    color: navajowhite;
 }
